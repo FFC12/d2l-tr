@@ -6,46 +6,15 @@ tab.interact_select(['mxnet', 'pytorch', 'tensorflow', 'jax'])
 # Automatic Differentiation
 :label:`sec_autograd`
 
-Recall from :numref:`sec_calculus` 
+numref:sec_calculus'tan hatırlayacağınız üzere türevleri hesaplamak,
+ derin ağları eğitmek için kullanacağımız tüm optimizasyon algoritmalarında 
+ çok önemli bir adımdır. Hesaplamalar basit olsa da, bunları elle yapmak sıkıcı ve hataya açık olabilir ve modellerimiz daha karmaşık hale geldikçe bu sorun daha da büyür.
 
-that calculating derivatives is the crucial step
-in all of the optimization algorithms
-that we will use to train deep networks.
+Neyse ki tüm modern derin öğrenme çerçeveleri otomatik farklılaştırma
+ (genellikle autograd olarak kısaltılır) sunarak bu işi bizim sırtımızdan alır. 
+ Verileri birbirini takip eden her bir fonksiyondan geçirirken, çerçeve her bir değerin diğerlerine nasıl bağlı olduğunu izleyen bir hesaplama grafiği oluşturur. Türevleri hesaplamak için otomatik türevlendirme, zincir kuralını uygulayarak bu grafik üzerinden geriye doğru çalışır. Zincir kuralını bu şekilde uygulamak için kullanılan hesaplama algoritmasına geri yayılım denir.
 
-While the calculations are straightforward,
-working them out by hand can be tedious and error-prone, 
-and this problem only grows
-as our models become more complex.
-
-Fortunately all modern deep learning frameworks
-take this work off of our plates
-by offering *automatic differentiation*
-(often shortened to *autograd*). 
-As we pass data through each successive function,
-the framework builds a *computational graph* 
-that tracks how each value depends on others.
-To calculate derivatives, 
-automatic differentiation 
-works backwards through this graph
-applying the chain rule. 
-The computational algorithm for applying the chain rule
-in this fashion is called *backpropagation*.
-
-While autograd libraries have become
-a hot concern over the past decade,
-they have a long history. 
-In fact the earliest references to autograd
-date back over half of a century :cite:`Wengert.1964`.
-The core ideas behind modern backpropagation
-date to a PhD thesis from 1980 :cite:`Speelpenning.1980`
-and were further developed in the late 1980s :cite:`Griewank.1989`.
-While backpropagation has become the default method 
-for computing gradients, it is not the only option. 
-For instance, the Julia programming language employs 
-forward propagation :cite:`Revels.Lubin.Papamarkou.2016`. 
-Before exploring methods, 
-let's first master the autograd package.
-
+Otograd kütüphaneler son on yılda önemli bir konu haline gelmiş olsa da, uzun bir geçmişe sahiptir. Aslında autograd ile ilgili en eski referanslar yarım yüzyıl öncesine dayanmaktadır :cite:Wengert.1964. Modern geriye yayılımın arkasındaki temel fikirler 1980 tarihli bir doktora tezine dayanmaktadır :cite:Speelpenning.1980 ve 1980'lerin sonlarında daha da geliştirilmiştir :cite:Griewank.1989. Geriye yayılım, gradyanları hesaplamak için varsayılan yöntem haline gelmiş olsa da tek seçenek değildir. Örneğin, Julia programlama dili ileri yayılımı kullanmaktadır :cite:Revels.Lubin.Papamarkou.2016. Yöntemleri keşfetmeden önce, ilk olarak autograd paketinde uzmanlaşalım.
 
 
 
